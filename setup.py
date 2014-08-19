@@ -1,5 +1,6 @@
 from setuptools import setup
 import os
+import platform
 
 requirements = ['tornado']
 tests_require = ['coverage', 'coveralls', 'mock', 'nose']
@@ -17,9 +18,8 @@ setup(name='sprockets',
       description=('A modular, loosely coupled micro-framework built on top '
                    'of Tornado simplifying the creation of web applications '
                    'and RabbitMQ workers'),
-      entry_points={'console_scripts': ['sprockets=sprockets:main']}
-      maintainer='Gavin M. Roy',
-      maintainer_email='gavinr@aweber.com',
+      entry_points={'console_scripts': ['sprockets=sprockets:main']},
+      author='AWeber Communications',
       url='https://github.com/sprockets/sprockets',
       install_requires=requirements,
       license=open('LICENSE').read(),
