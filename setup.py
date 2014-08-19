@@ -1,14 +1,15 @@
-from setuptools import setup
 import os
-import platform
+from setuptools import setup
+import sys
 
-requirements = ['tornado']
+requirements = []
 tests_require = ['coverage', 'coveralls', 'mock', 'nose']
 
 # Requirements for Python 2.6
-(major, minor, rev) = platform.python_version_tuple()
-if float('%s.%s' % (major, minor)) < 2.7:
+version = sys.version_info
+if (version.major, version.minor) < (2, 7):
     requirements.append('argparse')
+    requirements.append('importlib')
     requirements.append('logutils')
     tests_require.append('unittest2')
 
@@ -18,7 +19,7 @@ setup(name='sprockets',
       description=('A modular, loosely coupled micro-framework built on top '
                    'of Tornado simplifying the creation of web applications '
                    'and RabbitMQ workers'),
-      entry_points={'console_scripts': ['sprockets=sprockets:main']},
+      entry_points={'console_scripts': ['sprockets=sprockets.cli:main']},
       author='AWeber Communications',
       url='https://github.com/sprockets/sprockets',
       install_requires=requirements,
