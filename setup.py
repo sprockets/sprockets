@@ -1,4 +1,3 @@
-import os
 from setuptools import setup
 import sys
 
@@ -12,7 +11,6 @@ if (version.major, version.minor) < (2, 7):
     requirements.append('importlib')
     requirements.append('logutils')
     tests_require.append('unittest2')
-
 
 setup(name='sprockets',
       version='0.1.0',
@@ -47,4 +45,4 @@ setup(name='sprockets',
                    'Topic :: Software Development :: Libraries :: Python Modules'],
       test_suite='nose.collector',
       tests_require=tests_require,
-      zip_safe=True)
+      zip_safe=False)
