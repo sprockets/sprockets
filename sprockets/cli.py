@@ -241,7 +241,7 @@ class CLI(object):
 
     @staticmethod
     def _get_argument_parser():
-        """Return an instance of the 
+        """Return an instance of the argument parser.
 
         :return: argparse.ArgumentParser
 
