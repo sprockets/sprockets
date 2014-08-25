@@ -132,7 +132,8 @@ class CLI(object):
 
         self._arg_parser.add_argument('-v', '--verbose',
                                       action='count',
-                                      help='Verbose logging output')
+                                      help=('Verbose logging output, use -vv '
+                                            'for DEBUG level logging'))
 
         self._arg_parser.add_argument('--version',
                                       action='version',
