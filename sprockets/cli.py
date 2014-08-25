@@ -32,7 +32,6 @@ else:
 
 import pkg_resources
 
-from sprockets import daemon
 from sprockets import __version__
 
 DESCRIPTION = 'Available sprockets application controllers'
@@ -91,36 +90,14 @@ class CLI(object):
         # The list command prevents any other processing of args
         if self._args.list:
             self._print_installed_apps(self._args.controller)
+            sys.exit(0)
 
-        # Should be starting an application
-        else:
+        # If app is not specified at this point, raise an error
+        if not self._args.application:
+            sys.stderr.write('\nerror: application not specified\n\n')
+            self._arg_parser.print_help()
+            sys.exit(-1)
 
-            # If app is not specified at this point, raise an error
-            if not self._args.application:
-                sys.stderr.write('\nerror: application not specified\n\n')
-                self._arg_parser.print_help()
-                sys.exit(-1)
-
-            # Fork into the background as a daemon if instructed to do so
-            if self._args.daemonize:
-                try:
-                    with daemon.Daemon(self) as obj:
-                        obj.start()
-                except (OSError, ValueError) as error:
-                    sys.stderr.write('\nerror: could not start %s (%s)\n\n' %
-                                     (sys.argv[0], error))
-                    sys.exit(1)
-
-            else:
-                # Start the application directly, no forking involved
-                self.start()
-
-    def start(self):
-        """Invoked once the application is ready to be started. If the cli
-        args indicate that the application should be a daemon, it will already
-        be forked at this point.
-
-        """
         # If it's a registered app reference by name, get the module name
         app_module = self._get_application_module(self._args.controller,
                                                   self._args.application)
@@ -148,10 +125,6 @@ class CLI(object):
         self._arg_parser.add_argument('-l', '--list',
                                       action='store_true',
                                       help='List installed sprockets apps')
-
-        self._arg_parser.add_argument('-d', '--daemonize',
-                                      action='store_true',
-                                      help='Fork into a background process')
 
         self._arg_parser.add_argument('-s', '--syslog',
                                       action='store_true',
