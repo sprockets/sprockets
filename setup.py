@@ -15,7 +15,7 @@ if sys.version_info < (3, 0):
 
 
 setup(name='sprockets',
-      version='0.1.0',
+      version='0.1.1',
       description=('A modular, loosely coupled micro-framework built on top '
                    'of Tornado simplifying the creation of web applications '
                    'and RabbitMQ workers'),

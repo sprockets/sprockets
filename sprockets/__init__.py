@@ -5,7 +5,7 @@ A loosely coupled framework built on top of Tornado. Take what you need to
 build awesome applications.
 
 """
-version_info = (0, 0, 0)
+version_info = (0, 1, 1)
 __version__ = '.'.join(str(v) for v in version_info)
 
 import logging
