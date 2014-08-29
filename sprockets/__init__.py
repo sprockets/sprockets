@@ -10,6 +10,8 @@ __version__ = '.'.join(str(v) for v in version_info)
 
 import logging
 
+__import__('pkg_resources').declare_namespace(__name__)
+
 # Ensure there is a NullHandler for logging
 try:
     from logging import NullHandler
